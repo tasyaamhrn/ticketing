@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\booking;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('/booking', [booking::class, 'store'])->name('booking.store');
+Route::get('/booking/{id}', [booking::class, 'index']);
+Route::GET('/pdf/{id}',[booking::class,'exportPDF'])->name('booking.pdf');
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
