@@ -32,7 +32,7 @@ class booking extends Controller
         $booking->status = $request->input('status');
         $booking->save();
 
-        return redirect('/meeting');
+        return redirect('/dashboard');
     }
     public function store(Request $request)
     {
@@ -57,5 +57,11 @@ class booking extends Controller
         $booking = ModelsBooking::find($id);
         $pdf = PDF::loadView('booking-pdf', ['booking' => $booking]);
         return $pdf->download('cetak-ticket.pdf');
+    }
+    public function exportPDFall()
+    {
+        $booking = ModelsBooking::all();
+        $pdf = PDF::loadView('bookingall-pdf', ['booking' => $booking]);
+        return $pdf->download('cetak-pemesanan-tiket.pdf');
     }
 }

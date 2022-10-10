@@ -19,9 +19,15 @@ Route::post('/booking', [booking::class, 'store'])->name('booking.store');
 Route::get('/booking/{id}', [booking::class, 'index']);
 Route::GET('/pdf/{id}',[booking::class,'exportPDF'])->name('booking.pdf');
 Route::get('/login', [AuthController::class, 'index']);
-Route::get('/dashboard', [booking::class, 'show']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::delete('booking/delete/{id}',[booking::class,'destroy'])->name('booking.destroy');
 Route::get('/', function () {
     return view('landing');
 });
+Route::group(['middleware'], function () {
+    Route::put('booking/edit/{id}',[booking::class,'update'])->name('booking.update');
+    Route::get('/dashboard', [booking::class, 'show']);
+    Route::delete('booking/delete/{id}',[booking::class,'destroy'])->name('booking.destroy');
+    Route::GET('/pdfall',[booking::class,'exportPDFall'])->name('bookingall.pdf');
+});
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+

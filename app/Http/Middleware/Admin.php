@@ -18,12 +18,12 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if(!Auth::check()){
-            return redirect()->route('login');
+            return redirect()->route('/');
         }
-        if(Auth::user()->role_id != 3){
+        if(Auth::user()->email != 'admin@gmail.com'){
             return $next($request);
         }
         return redirect()->route('login');
-        return $next($request);
+        // return $next($request);
     }
 }
