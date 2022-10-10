@@ -14,7 +14,8 @@ class Booking extends Model
         'id_ticketing',
         'name',
         'address',
-    'phone'];
+    'phone',
+    'status',];
 
 
 }

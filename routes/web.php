@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\auth;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\booking;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('/booking', [booking::class, 'store'])->name('booking.store');
 Route::get('/booking/{id}', [booking::class, 'index']);
 Route::GET('/pdf/{id}',[booking::class,'exportPDF'])->name('booking.pdf');
+Route::get('/login', [AuthController::class, 'index']);
+Route::get('/dashboard', [booking::class, 'show']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::delete('booking/delete/{id}',[booking::class,'destroy'])->name('booking.destroy');
 Route::get('/', function () {
     return view('landing');
 });

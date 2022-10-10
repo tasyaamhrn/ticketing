@@ -69,7 +69,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a class="active" href="contact.html">Contact Us</a></li>
+          <li><a class="active" href="{{url('/login')}}">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

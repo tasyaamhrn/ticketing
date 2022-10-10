@@ -9,10 +9,30 @@ use PDF;
 
 class booking extends Controller
 {
+
     public function index($id)
     {
         $booking = ModelsBooking::find($id);
         return view('detail_booking', compact('booking'));
+    }
+    public function show(){
+        $booking = ModelsBooking::all();
+        return view('booking', compact('booking'));
+    }
+    public function destroy ($id){
+        $booking = ModelsBooking::findOrFail($id);
+        $booking->delete();
+        return redirect('/dashboard');
+    }
+    public function update(Request $request, $id){
+        $booking = ModelsBooking::find($id);
+        $booking->name = $request->input('name');
+        $booking->address = $request->input('address');
+        $booking->phone = $request->input('phone');
+        $booking->status = $request->input('status');
+        $booking->save();
+
+        return redirect('/meeting');
     }
     public function store(Request $request)
     {
@@ -28,8 +48,9 @@ class booking extends Controller
             'name' => $request->name,
             'address' => $request->address,
             'phone' => $request->phone,
+            'status' => 'Belum Check-in',
         ]);
-        return redirect('/booking/'.$tiket->id);
+        return redirect('booking/'.$tiket->id);
     }
     public function exportPDF($id)
     {
